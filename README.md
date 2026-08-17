@@ -1,34 +1,86 @@
-# TPM-2.0-And-Ms-Account-on-start-up-Auto-Bypass-
-AutoMatically Bypass TPM 2.0 OR MS Account On Start up 
-# Windows 11 Automated & Unattended Setup
+# Windows 11 Unattended Installer — Hardware Bypass
 
-This repository provides a pre-configured `autounattend.xml` answer file designed to streamline and automate the clean installation of Windows 11. By utilizing the official Microsoft Windows Deployment framework, this file automatically injects required configuration tweaks and skips restrictive setup phases right at boot.
+A pre-configured `autounattend.xml` for automating a clean Windows 11 installation while attempting to bypass common hardware compatibility checks and reduce setup prompts.
 
-## 🌟 Key Features
+> ⚠️ **Warning:** This project can automate disk and partition operations. **Back up all important data before installing Windows.** Carefully verify the target drive before proceeding.
 
-* **Hardware Restriction Bypass:** Automatically bypasses Windows 11 installation requirements for **TPM 2.0, Secure Boot, RAM size, Storage space, and CPU generation** during the initial setup phase.
-* **Account Requirement Bypass:** Bypasses the forced internet connection requirement (`BypassNRO`) and completely skips the mandatory "Sign in with a Microsoft Account" screen.
-* **Streamlined Experience:** Hides unnecessary setup screens including the EULA, OEM registration, and privacy configurations for a faster deployment.
+## Features
 
-This is an ideal administrative tool for IT professionals, developers, and enthusiasts looking to deploy Windows 11 on older hardware, virtual machines (VMs), or test environments without manual intervention.
+* **Hardware compatibility bypass** — Attempts to skip Windows 11 checks for:
 
----
+  * TPM 2.0
+  * Secure Boot
+  * Unsupported CPUs
+  * RAM requirements
+  * Storage requirements
+* **Local account setup** — Avoids requiring a Microsoft account where supported.
+* **Offline-friendly installation** — Designed to minimize dependency on an internet connection during setup.
+* **Automated setup** — Reduces manual interaction with Windows Setup.
+* **EULA and setup automation** — Automatically handles supported setup prompts and configuration steps.
 
-## 🚀 How to Use This File
+> **Compatibility note:** Microsoft may change Windows Setup behavior between releases. Bypass mechanisms that work with one Windows 11 version may not work with another.
 
-### Step 1: Create a Windows 11 Installation USB
-1. Plug a blank USB flash drive (at least 8GB) into your computer.
-2. Download the official **Windows 11 Media Creation Tool** from Microsoft.
-3. Run the tool and follow the prompts to create a bootable Windows 11 USB flash drive.
+## Requirements
 
-### Step 2: Download and Copy the XML File
-1. Download the `autounattend.xml` file from this repository.
-2. Copy the `autounattend.xml` file.
-3. Open your Windows 11 USB drive and paste the file directly into the **root directory** (the main folder of the USB, right next to the `setup.exe` file). 
+* A Windows 11 ISO
+* A USB flash drive suitable for Windows installation
+* A tool for creating bootable Windows media, such as Rufus
+* The included `autounattend.xml`
+* A computer capable of booting from USB
 
-> ⚠️ **Important:** Do *not* put it inside the `sources` folder or any sub-folders. It must sit on the main screen of the USB drive.
+## Installation
 
-### Step 3: Boot and Install
-1. Plug the USB drive into the target computer.
-2. Turn on the PC and instantly tap your computer's boot menu key (usually `F12`, `F11`, `F8`, or `Esc`) to select the USB drive.
-3. The Windows installer will launch and read your `autounattend.xml` file. It will automatically bypass all hardware checks and skip the Microsoft Account login screen without you needing to click anything.
+### 1. Download the Repository
+
+Clone or download this repository and locate:
+
+```text
+autounattend.xml
+```
+
+### 2. Create Windows 11 Installation Media
+
+Create a bootable USB drive from your Windows 11 ISO using your preferred tool.
+
+### 3. Copy the Answer File
+
+Copy `autounattend.xml` to the **root of the USB drive**, alongside the Windows Setup files:
+
+```text
+USB Drive/
+├── autounattend.xml
+├── boot/
+├── efi/
+├── sources/
+├── support/
+└── setup.exe
+```
+
+### 4. Boot from the USB
+
+Insert the USB drive into the target PC and boot from it.
+
+Windows Setup should automatically detect the answer file and apply the configured installation settings.
+
+### 5. Verify the Target Disk
+
+If the configuration includes automated partitioning or disk operations, **make absolutely sure the correct drive is selected** before proceeding.
+
+## Customization
+
+The answer file can be customized to suit different deployment scenarios.
+
+Possible customizations include:
+
+* Local user accounts
+* Computer name
+* Regional and language settings
+* Automated partition layouts
+* Windows edition selection
+* Setup preferences
+* First-logon commands
+* Registry configuration
+* Optional post-installation tasks
+
+
+**Free To Use**
